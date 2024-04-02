@@ -8,7 +8,7 @@ const getIP = (peer) => {
 }
 
 const getPeers = async (chain) => {
-    return axios.get(`https://polkachu.com/api/v1/chains/${chain}/live_peers`).then(
+    return axios.get(`https://polkachu.com/api/v2/chains/${chain}/live_peers`).then(
         (response) => {
             return response.data.live_peers;
         }
