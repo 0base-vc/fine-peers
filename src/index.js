@@ -26,20 +26,22 @@ const getPeers = async (chain) => {
         return;
     }
 
-    const goodPeers = []
+    const finePeers = []
     const chain = process.argv[2];
-    const peers = await getPeers(chain);
 
-    for (const peer of peers) {
-        const ip = getIP(peer);
-        const result = await ping.promise.probe(ip);
-        if (result.alive) console.log(result.host, result.time);
+    setInterval(async () => {
+        const peers = await getPeers(chain);
 
-        if (result.time < 100) {
-            goodPeers.push(peer);
+        for (const peer of peers) {
+            const ip = getIP(peer);
+            const result = await ping.promise.probe(ip);
+            if (result.alive) console.log(result.host, result.time);
+
+            if (result.time < 100) {
+                finePeers.push(peer);
+            }
         }
-    }
 
-    console.log(goodPeers.join(','));
-
+        console.log('Fine Peers : ', finePeers.join(','));
+    }, 5000);
 })();
