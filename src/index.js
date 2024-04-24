@@ -35,15 +35,14 @@ const getPeers = async (chain) => {
         for (const peer of peers) {
             const ip = getIP(peer);
             const result = await ping.promise.probe(ip);
-            if (result.alive) console.log(result.host, result.time);
-
+            // if (result.alive) console.log(result.host, result.time);
             if (result.time < 100) {
                 finePeers.push(peer);
             }
         }
 
-        console.log('Fine Peers : ', finePeers.join(','));
         if (finePeers.length > 10) {
+            console.log(finePeers.join(','));
             process.exit(0);
         }
     }, 5000);
