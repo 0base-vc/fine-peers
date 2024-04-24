@@ -43,5 +43,8 @@ const getPeers = async (chain) => {
         }
 
         console.log('Fine Peers : ', finePeers.join(','));
+        if (finePeers.length > 10) {
+            process.exit(0);
+        }
     }, 5000);
 })();
