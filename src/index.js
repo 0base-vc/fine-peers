@@ -34,7 +34,7 @@ const getPeers = async (chain) => {
             const ip = getIP(peer);
             const result = await ping.promise.probe(ip);
             // if (result.alive) console.log(result.host, result.time);
-            if (result.time < 10) {
+            if (result.time < 50) {
                 finePeers.push(peer);
             }
         }
