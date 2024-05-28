@@ -1,7 +1,8 @@
 # fine-peers
 
 ```bash
-npm run start {chain}
+npm run start {chain} ({timeout})
+npm run start {peers} ({timeout})
 ```
 
 ```bash
