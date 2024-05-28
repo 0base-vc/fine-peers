@@ -26,6 +26,12 @@ const getPeers = async (chain) => {
         return;
     }
 
+    let timeout = 99;
+    if(process.argv[3]) {
+        timeout = parseInt(process.argv[3]);
+        console.log(`Timeout: ${timeout}`);
+    }
+
     const finePeers = []
     if (process.argv[2].includes(',')) {
         const peers = process.argv[2].split(',');
@@ -34,7 +40,7 @@ const getPeers = async (chain) => {
             const ip = getIP(peer);
             const result = await ping.promise.probe(ip);
             if (result.alive) console.log(result.host, result.time);
-            if (result.time < 50) {
+            if (result.time < timeout) {
                 finePeers.push(peer);
             }
         }
@@ -52,7 +58,7 @@ const getPeers = async (chain) => {
                 const ip = getIP(peer);
                 const result = await ping.promise.probe(ip);
                 // if (result.alive) console.log(result.host, result.time);
-                if (result.time < 100) {
+                if (result.time < timeout) {
                     finePeers.push(peer);
                 }
             }
