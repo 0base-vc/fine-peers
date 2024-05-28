@@ -21,7 +21,6 @@ const getPeers = async (chain) => {
 };
 
 (async () => {
-    console.log(process.argv);
     if (!process.argv[2]) {
         console.log("Please provide chain name or peers as argument");
         return;
